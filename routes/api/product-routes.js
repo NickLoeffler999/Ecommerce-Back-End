@@ -1,11 +1,9 @@
 const router = require("express").Router();
 const { Product, Category, Tag, ProductTag } = require("../../models");
 
-// The `/api/products` endpoint
+// This method is used to find all of the products.
 
-// get all products
 router.get("/", (req, res) => {
-  // This method is used to find all of the products.
   Product.findAll({
     include: [
       {
@@ -25,9 +23,9 @@ router.get("/", (req, res) => {
     });
 });
 
-// get one product
+// This will find a single product by its "id" value.
+
 router.get("/:id", (req, res) => {
-  // This will find a single product by its "id" value.
   Product.findOne({
     where: {
       id: req.params.id,
@@ -50,7 +48,8 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// create new product
+// This will create a new product
+
 router.post("/", (req, res) => {
   /* req.body should look like this...
     {
@@ -124,8 +123,9 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// This will delete one Product by its "id" value.
+
 router.delete("/:id", (req, res) => {
-  // This will delete one Product by its "id" value.
   Product.destroy({
     where: {
       id: req.params.id,

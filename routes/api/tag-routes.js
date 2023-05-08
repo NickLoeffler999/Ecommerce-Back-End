@@ -1,10 +1,9 @@
 const router = require("express").Router();
 const { Tag, Product, ProductTag } = require("../../models");
 
-// The `/api/tags` endpoint
+// This will find all of the Tags.
 
 router.get("/", (req, res) => {
-  // This will find all of the Tags.
   Tag.findAll({
     include: {
       model: Product,
@@ -17,8 +16,9 @@ router.get("/", (req, res) => {
     });
 });
 
+// This will find a single Tag by its "id" value.
+
 router.get("/:id", (req, res) => {
-  // This will find a single Tag by its "id" value.
   Tag.findOne({
     where: {
       id: req.params.id,
@@ -34,8 +34,9 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// This will create a new tag.
+
 router.post("/", (req, res) => {
-  // This will create a new tag.
   Tag.create(req.body)
     .then((tagData) => res.json(tagData))
     .catch((err) => {
@@ -44,8 +45,9 @@ router.post("/", (req, res) => {
     });
 });
 
+// This will update a tag by its "id" value.
+
 router.put("/:id", (req, res) => {
-  // update a tag's name by its `id` value
   Tag.update({
     where: {
       id: req.params.id,
@@ -61,8 +63,9 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// This will delete a tag by its "id" value.
+
 router.delete("/:id", (req, res) => {
-  // delete on tag by its `id` value
   Tag.destroy({
     where: {
       id: req.params.id,

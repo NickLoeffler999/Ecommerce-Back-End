@@ -4,9 +4,10 @@ const sequelize = require("../config/connection.js");
 
 class Tag extends Model {}
 
+// Defining what Tag is, ran through the database.
+
 Tag.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,

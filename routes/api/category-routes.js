@@ -2,21 +2,20 @@ const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { Category, Product } = require("../../models");
 
-// The `/api/categories` endpoint
+// This will find all of the Categories.
 
 router.get("/", (req, res) => {
-  // This will find all of the Categories.
   Category.findAll({
     include: {
       model: Product,
       attributes: ["id", "category_id", "product_name", "stock", "price"],
     },
   }).then((categoryData) => res.json(categoryData));
-  // console.log(categoryData);
 });
 
+// This will find a category by its "id" value.
+
 router.get("/:id", (req, res) => {
-  // This will find a category by its "id" value.
   Category.findOne({
     where: {
       id: req.params.id,
@@ -33,8 +32,9 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// This will create a new category.
+
 router.post("/", (req, res) => {
-  // This will create a new category.
   Category.create(req.body)
     .then((categoryData) => res.json(categoryData))
     .catch((err) => {
@@ -43,8 +43,9 @@ router.post("/", (req, res) => {
     });
 });
 
+// This will update a category by its "id" value.
+
 router.put("/:id", (req, res) => {
-  // This will update a category by its "id" value.
   Category.update({
     where: {
       id: req.params.id,
@@ -61,8 +62,9 @@ router.put("/:id", (req, res) => {
     });
 });
 
+// This will delete a category by its "id" value.
+
 router.delete("/:id", (req, res) => {
-  // This will delete a category by its "id" value.
   Category.destroy({
     where: {
       id: req.params.id,
